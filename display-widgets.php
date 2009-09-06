@@ -1,8 +1,10 @@
 <?php
 /*
 Plugin Name: Display widgets
+Plugin URI: http://blog.strategy11.com/2009/09/06/display-widgets/
 Description: Adds checkboxes to each widget to show or hide on site pages.
 Author: Stephanie Wells
+Author URI: http://ionixdesign.com 
 Version: 1.0
 */
 
@@ -21,10 +23,10 @@ function dw_show_hide_widget_options($widget, $return, $instance){
     $instance['include'] = $instance['include'] ? $instance['include'] : 0;
 ?>   
      <p>
-    	<label for="<?php echo $widget->get_field_id('include'); ?>">Show/Don't Show Widget on the following pages</label>
+    	<label for="<?php echo $widget->get_field_id('include'); ?>">Show/Hide Widget on the following pages</label>
     	<select name="<?php echo $widget->get_field_name('include'); ?>" id="<?php echo $widget->get_field_id('include'); ?>" class="widefat">
             <option value="1" <?php echo selected( $instance['include'], 1 ) ?>>Show on checked</option>
-            <option value="0" <?php echo selected( $instance['include'], 0 ) ?>>Don't Show on checked</option> 
+            <option value="0" <?php echo selected( $instance['include'], 0 ) ?>>Hide on checked</option> 
         </select>
     </p>    
 
