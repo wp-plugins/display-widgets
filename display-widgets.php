@@ -23,10 +23,10 @@ function dw_show_hide_widget_options($widget, $return, $instance){
     $instance['include'] = $instance['include'] ? $instance['include'] : 0;
 ?>   
      <p>
-    	<label for="<?php echo $widget->get_field_id('include'); ?>">Show/Don't Show Widget on the following pages</label>
+    	<label for="<?php echo $widget->get_field_id('include'); ?>">Show/Hide Widget on the following pages</label>
     	<select name="<?php echo $widget->get_field_name('include'); ?>" id="<?php echo $widget->get_field_id('include'); ?>" class="widefat">
             <option value="1" <?php echo selected( $instance['include'], 1 ) ?>>Show on checked</option>
-            <option value="0" <?php echo selected( $instance['include'], 0 ) ?>>Don't Show on checked</option> 
+            <option value="0" <?php echo selected( $instance['include'], 0 ) ?>>Hide on checked</option> 
         </select>
     </p>    
 
