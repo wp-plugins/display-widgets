@@ -5,7 +5,7 @@ Plugin URI: http://blog.strategy11.com/2009/09/06/display-widgets/
 Description: Adds checkboxes to each widget to show or hide on site pages.
 Author: Stephanie Wells
 Author URI: http://ionixdesign.com 
-Version: 1.0
+Version: 1.1
 */
 
 function show_dw_widget($instance){
@@ -14,7 +14,7 @@ function show_dw_widget($instance){
     if (($instance['include'] and $show == false) or ($instance['include'] == 0 and $show))
         return false;
     else
-        return true;
+        return $instance;
 }
 
 function dw_show_hide_widget_options($widget, $return, $instance){ 
