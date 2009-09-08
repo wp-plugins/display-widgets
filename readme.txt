@@ -4,7 +4,7 @@ Donate link: http://blog.strategy11.com/donate/
 Tags: widgets, show, hide, Thesis, sidebar
 Requires at least: 2.8
 Tested up to: 2.8.4
-Stable tag: 1.1
+Stable tag: 1.2
 
 Adds checkboxes to each widget to either show or hide on every site page.
 
