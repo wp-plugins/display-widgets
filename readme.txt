@@ -4,7 +4,7 @@ Donate link: http://blog.strategy11.com/donate/
 Tags: widgets, show, hide, Thesis, sidebar
 Requires at least: 2.8
 Tested up to: 2.8.4
-Stable tag: 1.2
+Stable tag: 1.3
 
 Adds checkboxes to each widget to either show or hide on every site page.
 
@@ -33,4 +33,16 @@ This is a known limitation. Widgets written in the pre-2.8 format don't work the
 
 1. The extra widget options added.
 
+== Changelog ==
+
+= 1.3 =
+* Added check box for Home page if it is the blog page
+* Added check boxes for single post and archive pages
+* Save hide/show option correctly for more widgets
+
+= 1.2 =
+* Save page check boxes for more widgets
+
+= 1.1 =
+* Fixed bug that prevented other widget options to be displayed
 
