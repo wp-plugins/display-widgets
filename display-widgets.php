@@ -5,12 +5,12 @@ Plugin URI: http://blog.strategy11.com/2009/09/06/display-widgets/
 Description: Adds checkboxes to each widget to show or hide on site pages.
 Author: Stephanie Wells
 Author URI: http://ionixdesign.com 
-Version: 1.3
+Version: 1.4
 */
 
 function show_dw_widget($instance){
     $post_id = $GLOBALS['post']->ID;
-    if (get_option('show_on_front') == 'posts' and is_home())
+    if (is_home())
         $show = $instance['page-home'];
     else if (is_archive())
         $show = $instance['page-archive'];
@@ -40,22 +40,18 @@ function dw_show_hide_widget_options($widget, $return, $instance){
 
 <div style="height:150px; overflow:auto; border:1px solid #dfdfdf;">
     <?php 
-    if (get_option('show_on_front') == 'posts' ){
-        $instance['page-home'] = $instance['page-home'] ? $instance['page-home'] : false;
-    
+    $instance['page-home'] = $instance['page-home'] ? $instance['page-home'] : false;
     $instance['page-archive'] = $instance['page-archive'] ? $instance['page-archive'] : false;
     $instance['page-single'] = $instance['page-single'] ? $instance['page-single'] : false;    
-    ?>
-        <p><input class="checkbox" type="checkbox" <?php checked($instance['page-home'], true) ?> id="<?php echo $widget->get_field_id('page-home'); ?>" name="<?php echo $widget->get_field_name('page-home'); ?>" />
-        <label for="<?php echo $widget->get_field_id('page-home'); ?>"><?php _e('Home Page') ?></label></p>
-    <?php
-    }
+
     foreach ($pages as $page){ 
         $instance['page-'.$page->ID] = $instance['page-'.$page->ID] ? $instance['page-'.$page->ID] : false;   
     ?>
         <p><input class="checkbox" type="checkbox" <?php checked($instance['page-'.$page->ID], true) ?> id="<?php echo $widget->get_field_id('page-'.$page->ID); ?>" name="<?php echo $widget->get_field_name('page-'.$page->ID); ?>" />
         <label for="<?php echo $widget->get_field_id('page-'.$page->ID); ?>"><?php _e($page->post_title) ?></label></p>
     <?php	}  ?>
+    <p><input class="checkbox" type="checkbox" <?php checked($instance['page-home'], true) ?> id="<?php echo $widget->get_field_id('page-home'); ?>" name="<?php echo $widget->get_field_name('page-home'); ?>" />
+    <label for="<?php echo $widget->get_field_id('page-home'); ?>"><?php _e('Blog Page') ?></label></p>
     
     <p><input class="checkbox" type="checkbox" <?php checked($instance['page-archive'], true) ?> id="<?php echo $widget->get_field_id('page-archive'); ?>" name="<?php echo $widget->get_field_name('page-archive'); ?>" />
     <label for="<?php echo $widget->get_field_id('page-archive'); ?>"><?php _e('Archives Page') ?></label></p>

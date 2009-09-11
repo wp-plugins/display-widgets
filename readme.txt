@@ -34,6 +34,8 @@ This is a known limitation. Widgets written in the pre-2.8 format don't work the
 1. The extra widget options added.
 
 == Changelog ==
+= 1.4 =
+* Changed "Home Page" check box to "Blog Page"
 
 = 1.3 =
 * Added check box for Home page if it is the blog page
