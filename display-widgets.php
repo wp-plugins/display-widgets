@@ -4,8 +4,8 @@ Plugin Name: Display widgets
 Plugin URI: http://blog.strategy11.com/2009/09/06/display-widgets/
 Description: Adds checkboxes to each widget to show or hide on site pages.
 Author: Stephanie Wells
-Author URI: http://ionixdesign.com 
-Version: 1.4
+Author URI: http://blog.strategy11.com
+Version: 1.5
 */
 
 function show_dw_widget($instance){
@@ -16,6 +16,8 @@ function show_dw_widget($instance){
         $show = $instance['page-archive'];
     else if (is_single())    
         $show = $instance['page-single'];
+    else if (is_404()) 
+        $show = $instance['page-404'];
     else
         $show = $instance['page-'.$post_id]; 
     
@@ -42,7 +44,8 @@ function dw_show_hide_widget_options($widget, $return, $instance){
     <?php 
     $instance['page-home'] = $instance['page-home'] ? $instance['page-home'] : false;
     $instance['page-archive'] = $instance['page-archive'] ? $instance['page-archive'] : false;
-    $instance['page-single'] = $instance['page-single'] ? $instance['page-single'] : false;    
+    $instance['page-single'] = $instance['page-single'] ? $instance['page-single'] : false;
+    $instance['page-404'] = $instance['page-404'] ? $instance['page-404'] : false;  
 
     foreach ($pages as $page){ 
         $instance['page-'.$page->ID] = $instance['page-'.$page->ID] ? $instance['page-'.$page->ID] : false;   
@@ -58,6 +61,9 @@ function dw_show_hide_widget_options($widget, $return, $instance){
 
     <p><input class="checkbox" type="checkbox" <?php checked($instance['page-single'], true) ?> id="<?php echo $widget->get_field_id('page-single'); ?>" name="<?php echo $widget->get_field_name('page-single'); ?>" />
     <label for="<?php echo $widget->get_field_id('page-single'); ?>"><?php _e('Single Post Page') ?></label></p>
+        
+    <p><input class="checkbox" type="checkbox" <?php checked($instance['page-404'], true) ?> id="<?php echo $widget->get_field_id('page-404'); ?>" name="<?php echo $widget->get_field_name('page-404'); ?>" />
+    <label for="<?php echo $widget->get_field_id('page-404'); ?>"><?php _e('404 Page') ?></label></p>
 <?php
 echo '</div>';        
 }
@@ -70,6 +76,7 @@ function dw_update_widget_options($instance, $new_instance, $old_instance){
     $instance['page-home'] = $new_instance['page-home'];
     $instance['page-archive'] = $new_instance['page-archive'];
     $instance['page-single'] = $new_instance['page-single'];
+    $instance['page-404'] = $new_instance['page-404'];
     return $instance;
 }
 
