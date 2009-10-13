@@ -1,17 +1,19 @@
 <?php
 /*
 Plugin Name: Display widgets
-Plugin URI: http://blog.strategy11.com/display-widgets/
+Plugin URI: http://blog.strategy11.com/2009/09/06/display-widgets/
 Description: Adds checkboxes to each widget to show or hide on site pages.
 Author: Stephanie Wells
 Author URI: http://blog.strategy11.com
-Version: 1.5
+Version: 1.6
 */
 
 function show_dw_widget($instance){
     $post_id = $GLOBALS['post']->ID;
     if (is_home())
         $show = $instance['page-home'];
+    else if (is_category())
+        $show = $instance['cat-'.get_query_var('cat')];
     else if (is_archive())
         $show = $instance['page-archive'];
     else if (is_single())    
@@ -30,7 +32,7 @@ function show_dw_widget($instance){
 function dw_show_hide_widget_options($widget, $return, $instance){ 
     $pages = get_posts( array('post_type' => 'page', 'post_status' => 'published', 'numberposts' => 99, 'order_by' => 'post_title', 'order' => 'ASC'));
     
-    $instance['include'] = $instance['include'] ? $instance['include'] : 0;
+    $instance['include'] = isset($instance['include']) ? $instance['include'] : 0;
 ?>   
      <p>
     	<label for="<?php echo $widget->get_field_id('include'); ?>">Show/Hide Widget</label>
@@ -41,18 +43,27 @@ function dw_show_hide_widget_options($widget, $return, $instance){
     </p>    
 
 <div style="height:150px; overflow:auto; border:1px solid #dfdfdf;">
+    <p><b>Pages</b></p>
     <?php 
-    $instance['page-home'] = $instance['page-home'] ? $instance['page-home'] : false;
-    $instance['page-archive'] = $instance['page-archive'] ? $instance['page-archive'] : false;
-    $instance['page-single'] = $instance['page-single'] ? $instance['page-single'] : false;
-    $instance['page-404'] = $instance['page-404'] ? $instance['page-404'] : false;  
+    $instance['page-home'] = isset($instance['page-home']) ? $instance['page-home'] : false;
+    $instance['page-archive'] = isset($instance['page-archive']) ? $instance['page-archive'] : false;
+    $instance['page-single'] = isset($instance['page-single']) ? $instance['page-single'] : false;
+    $instance['page-404'] = isset($instance['page-404']) ? $instance['page-404'] : false;  
 
     foreach ($pages as $page){ 
-        $instance['page-'.$page->ID] = $instance['page-'.$page->ID] ? $instance['page-'.$page->ID] : false;   
+        $instance['page-'.$page->ID] = isset($instance['page-'.$page->ID]) ? $instance['page-'.$page->ID] : false;   
     ?>
         <p><input class="checkbox" type="checkbox" <?php checked($instance['page-'.$page->ID], true) ?> id="<?php echo $widget->get_field_id('page-'.$page->ID); ?>" name="<?php echo $widget->get_field_name('page-'.$page->ID); ?>" />
         <label for="<?php echo $widget->get_field_id('page-'.$page->ID); ?>"><?php _e($page->post_title) ?></label></p>
     <?php	}  ?>
+    <p><b>Categories</b></p>
+    <?php foreach (get_categories() as $cat){ 
+        $instance['cat-'.$cat->cat_ID] = isset($instance['cat-'.$cat->cat_ID]) ? $instance['cat-'.$cat->cat_ID] : false;   
+    ?>
+        <p><input class="checkbox" type="checkbox" <?php checked($instance['cat-'.$cat->cat_ID], true) ?> id="<?php echo $widget->get_field_id('cat-'.$cat->cat_ID); ?>" name="<?php echo $widget->get_field_name('cat-'.$cat->cat_ID); ?>" />
+        <label for="<?php echo $widget->get_field_id('cat-'.$cat->cat_ID); ?>"><?php _e($cat->cat_name) ?></label></p>
+    <?php } ?>
+    <p><b>Miscellaneous</b></p>
     <p><input class="checkbox" type="checkbox" <?php checked($instance['page-home'], true) ?> id="<?php echo $widget->get_field_id('page-home'); ?>" name="<?php echo $widget->get_field_name('page-home'); ?>" />
     <label for="<?php echo $widget->get_field_id('page-home'); ?>"><?php _e('Blog Page') ?></label></p>
     
@@ -72,6 +83,8 @@ function dw_update_widget_options($instance, $new_instance, $old_instance){
     $pages = get_posts( array('post_type' => 'page', 'post_status' => 'published', 'numberposts' => 99, 'order_by' => 'post_title', 'order' => 'ASC'));
     foreach ($pages as $page)
         $instance['page-'.$page->ID] = $new_instance['page-'.$page->ID] ? true : false;
+    foreach (get_categories() as $cat)
+        $instance['cat-'.$cat->cat_ID] = $new_instance['cat-'.$cat->cat_ID] ? true : false;
     $instance['include'] = $new_instance['include'];
     $instance['page-home'] = $new_instance['page-home'];
     $instance['page-archive'] = $new_instance['page-archive'];
