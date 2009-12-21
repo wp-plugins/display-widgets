@@ -5,7 +5,7 @@ Plugin URI: http://blog.strategy11.com/display-widgets/
 Description: Adds checkboxes to each widget to show or hide on site pages.
 Author: Stephanie Wells
 Author URI: http://blog.strategy11.com
-Version: 1.6
+Version: 1.7
 */
 
 function show_dw_widget($instance){
@@ -82,14 +82,14 @@ echo '</div>';
 function dw_update_widget_options($instance, $new_instance, $old_instance){
     $pages = get_posts( array('post_type' => 'page', 'post_status' => 'published', 'numberposts' => 99, 'order_by' => 'post_title', 'order' => 'ASC'));
     foreach ($pages as $page)
-        $instance['page-'.$page->ID] = $new_instance['page-'.$page->ID] ? true : false;
+        $instance['page-'.$page->ID] = $new_instance['page-'.$page->ID] ? 1 : 0;
     foreach (get_categories() as $cat)
-        $instance['cat-'.$cat->cat_ID] = $new_instance['cat-'.$cat->cat_ID] ? true : false;
-    $instance['include'] = $new_instance['include'];
-    $instance['page-home'] = $new_instance['page-home'];
-    $instance['page-archive'] = $new_instance['page-archive'];
-    $instance['page-single'] = $new_instance['page-single'];
-    $instance['page-404'] = $new_instance['page-404'];
+        $instance['cat-'.$cat->cat_ID] = $new_instance['cat-'.$cat->cat_ID] ? 1 : 0;
+    $instance['include'] = $new_instance['include'] ? 1 : 0;
+    $instance['page-home'] = $new_instance['page-home'] ? 1 : 0;
+    $instance['page-archive'] = $new_instance['page-archive'] ? 1 : 0;
+    $instance['page-single'] = $new_instance['page-single'] ? 1 : 0;
+    $instance['page-404'] = $new_instance['page-404'] ? 1 : 0;
     return $instance;
 }
 
