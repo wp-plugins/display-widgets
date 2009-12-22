@@ -5,11 +5,10 @@ Plugin URI: http://blog.strategy11.com/display-widgets/
 Description: Adds checkboxes to each widget to show or hide on site pages.
 Author: Stephanie Wells
 Author URI: http://blog.strategy11.com
-Version: 1.7
+Version: 1.8
 */
 
 function show_dw_widget($instance){
-    $post_id = $GLOBALS['post']->ID;
     if (is_home())
         $show = $instance['page-home'];
     else if (is_category())
@@ -20,8 +19,12 @@ function show_dw_widget($instance){
         $show = $instance['page-single'];
     else if (is_404()) 
         $show = $instance['page-404'];
-    else
+    else if (is_search())
+        $show = $instance['page-search'];
+    else{
+        $post_id = $GLOBALS['post']->ID;
         $show = $instance['page-'.$post_id]; 
+    }
     
     if (($instance['include'] and $show == false) or ($instance['include'] == 0 and $show))
         return false;
@@ -31,6 +34,7 @@ function show_dw_widget($instance){
 
 function dw_show_hide_widget_options($widget, $return, $instance){ 
     $pages = get_posts( array('post_type' => 'page', 'post_status' => 'published', 'numberposts' => 99, 'order_by' => 'post_title', 'order' => 'ASC'));
+    $wp_page_types = array('home' => 'Blog','archive' => 'Archives','single' => 'Single Post','404' => '404', 'search' => 'Search');
     
     $instance['include'] = isset($instance['include']) ? $instance['include'] : 0;
 ?>   
@@ -44,13 +48,7 @@ function dw_show_hide_widget_options($widget, $return, $instance){
 
 <div style="height:150px; overflow:auto; border:1px solid #dfdfdf;">
     <p><b>Pages</b></p>
-    <?php 
-    $instance['page-home'] = isset($instance['page-home']) ? $instance['page-home'] : false;
-    $instance['page-archive'] = isset($instance['page-archive']) ? $instance['page-archive'] : false;
-    $instance['page-single'] = isset($instance['page-single']) ? $instance['page-single'] : false;
-    $instance['page-404'] = isset($instance['page-404']) ? $instance['page-404'] : false;  
-
-    foreach ($pages as $page){ 
+    <?php foreach ($pages as $page){ 
         $instance['page-'.$page->ID] = isset($instance['page-'.$page->ID]) ? $instance['page-'.$page->ID] : false;   
     ?>
         <p><input class="checkbox" type="checkbox" <?php checked($instance['page-'.$page->ID], true) ?> id="<?php echo $widget->get_field_id('page-'.$page->ID); ?>" name="<?php echo $widget->get_field_name('page-'.$page->ID); ?>" />
@@ -63,20 +61,16 @@ function dw_show_hide_widget_options($widget, $return, $instance){
         <p><input class="checkbox" type="checkbox" <?php checked($instance['cat-'.$cat->cat_ID], true) ?> id="<?php echo $widget->get_field_id('cat-'.$cat->cat_ID); ?>" name="<?php echo $widget->get_field_name('cat-'.$cat->cat_ID); ?>" />
         <label for="<?php echo $widget->get_field_id('cat-'.$cat->cat_ID); ?>"><?php _e($cat->cat_name) ?></label></p>
     <?php } ?>
-    <p><b>Miscellaneous</b></p>
-    <p><input class="checkbox" type="checkbox" <?php checked($instance['page-home'], true) ?> id="<?php echo $widget->get_field_id('page-home'); ?>" name="<?php echo $widget->get_field_name('page-home'); ?>" />
-    <label for="<?php echo $widget->get_field_id('page-home'); ?>"><?php _e('Blog Page') ?></label></p>
     
-    <p><input class="checkbox" type="checkbox" <?php checked($instance['page-archive'], true) ?> id="<?php echo $widget->get_field_id('page-archive'); ?>" name="<?php echo $widget->get_field_name('page-archive'); ?>" />
-    <label for="<?php echo $widget->get_field_id('page-archive'); ?>"><?php _e('Archives Page') ?></label></p>
-
-    <p><input class="checkbox" type="checkbox" <?php checked($instance['page-single'], true) ?> id="<?php echo $widget->get_field_id('page-single'); ?>" name="<?php echo $widget->get_field_name('page-single'); ?>" />
-    <label for="<?php echo $widget->get_field_id('page-single'); ?>"><?php _e('Single Post Page') ?></label></p>
-        
-    <p><input class="checkbox" type="checkbox" <?php checked($instance['page-404'], true) ?> id="<?php echo $widget->get_field_id('page-404'); ?>" name="<?php echo $widget->get_field_name('page-404'); ?>" />
-    <label for="<?php echo $widget->get_field_id('page-404'); ?>"><?php _e('404 Page') ?></label></p>
-<?php
-echo '</div>';        
+    <p><b>Miscellaneous</b></p>
+    <?php foreach ($wp_page_types as $key => $label){ 
+        $instance['page-'. $key] = isset($instance['page-'. $key]) ? $instance['page-'. $key] : false;
+    ?>
+        <p><input class="checkbox" type="checkbox" <?php checked($instance['page-'. $key], true) ?> id="<?php echo $widget->get_field_id('page-'. $key); ?>" name="<?php echo $widget->get_field_name('page-'. $key); ?>" />
+        <label for="<?php echo $widget->get_field_id('page-'. $key); ?>"><?php _e($label .' Page') ?></label></p>
+    <?php } ?>
+    </div>
+<?php        
 }
 
 function dw_update_widget_options($instance, $new_instance, $old_instance){
@@ -90,6 +84,7 @@ function dw_update_widget_options($instance, $new_instance, $old_instance){
     $instance['page-archive'] = $new_instance['page-archive'] ? 1 : 0;
     $instance['page-single'] = $new_instance['page-single'] ? 1 : 0;
     $instance['page-404'] = $new_instance['page-404'] ? 1 : 0;
+    $instance['page-search'] = $new_instance['page-search'] ? 1 : 0;
     return $instance;
 }
 
