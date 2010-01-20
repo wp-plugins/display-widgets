@@ -5,19 +5,29 @@ Plugin URI: http://blog.strategy11.com/display-widgets/
 Description: Adds checkboxes to each widget to show or hide on site pages.
 Author: Stephanie Wells
 Author URI: http://blog.strategy11.com
-Version: 1.8
+Version: 1.9
 */
+//TODO: Add text field for comma separated list of post ids
 
 function show_dw_widget($instance){
     if (is_home())
-        $show = $instance['page-home'];
+        $show = isset($instance['page-home']) ? ($instance['page-home']) : false;
+    else if (is_front_page())
+        $show = isset($instance['page-front']) ? ($instance['page-front']) : false;
     else if (is_category())
         $show = $instance['cat-'.get_query_var('cat')];
     else if (is_archive())
         $show = $instance['page-archive'];
-    else if (is_single())    
+    else if (is_single()){
         $show = $instance['page-single'];
-    else if (is_404()) 
+        if (!$show){
+            foreach(get_the_category() as $cat){ 
+                if ($show) continue;
+                if (isset($instance['cat-'.$cat->cat_ID]))
+                    $show = $instance['cat-'.$cat->cat_ID];
+            } 
+        }
+    }else if (is_404()) 
         $show = $instance['page-404'];
     else if (is_search())
         $show = $instance['page-search'];
@@ -25,8 +35,7 @@ function show_dw_widget($instance){
         $post_id = $GLOBALS['post']->ID;
         $show = $instance['page-'.$post_id]; 
     }
-    
-    if (($instance['include'] and $show == false) or ($instance['include'] == 0 and $show))
+    if (isset($instance['include']) && (($instance['include'] and $show == false) or ($instance['include'] == 0 and $show)))
         return false;
     else
         return $instance;
@@ -34,7 +43,7 @@ function show_dw_widget($instance){
 
 function dw_show_hide_widget_options($widget, $return, $instance){ 
     $pages = get_posts( array('post_type' => 'page', 'post_status' => 'published', 'numberposts' => 99, 'order_by' => 'post_title', 'order' => 'ASC'));
-    $wp_page_types = array('home' => 'Blog','archive' => 'Archives','single' => 'Single Post','404' => '404', 'search' => 'Search');
+    $wp_page_types = array('front' => 'Front', 'home' => 'Blog','archive' => 'Archives','single' => 'Single Post','404' => '404', 'search' => 'Search');
     
     $instance['include'] = isset($instance['include']) ? $instance['include'] : 0;
 ?>   
@@ -80,6 +89,7 @@ function dw_update_widget_options($instance, $new_instance, $old_instance){
     foreach (get_categories() as $cat)
         $instance['cat-'.$cat->cat_ID] = $new_instance['cat-'.$cat->cat_ID] ? 1 : 0;
     $instance['include'] = $new_instance['include'] ? 1 : 0;
+    $instance['page-front'] = $new_instance['page-front'] ? 1 : 0;
     $instance['page-home'] = $new_instance['page-home'] ? 1 : 0;
     $instance['page-archive'] = $new_instance['page-archive'] ? 1 : 0;
     $instance['page-single'] = $new_instance['page-single'] ? 1 : 0;
@@ -91,5 +101,5 @@ function dw_update_widget_options($instance, $new_instance, $old_instance){
 
 add_filter('widget_display_callback', 'show_dw_widget');
 add_action('in_widget_form', 'dw_show_hide_widget_options', 10, 3);
-add_filter('widget_update_callback', 'dw_update_widget_options', 10, 3)
+add_filter('widget_update_callback', 'dw_update_widget_options', 10, 3);
 ?>
