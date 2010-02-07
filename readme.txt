@@ -10,7 +10,7 @@ Simply hide widgets on specified pages. Adds checkboxes to each widget to either
 
 == Description ==
 
-Change your sidebar content with different pages. Avoid creating multiple sidebars and duplicating widgets by adding check boxes to each widget in the admin (as long as it is written in the version 2.8 format) which will either show or hide the widgets on every site page. Great for use with Thesis theme, or just to avoid extra coding. 
+Change your sidebar content with different pages. Avoid creating multiple sidebars and duplicating widgets by adding check boxes to each widget in the admin (as long as it is written in the WordPress version 2.8 format) which will either show or hide the widgets on every site page. Great for use with the [Thesis WordPress Theme](http://blog.strategy11.com/thesis "Thesis WordPress Theme") (aff link), or just to avoid extra coding. 
 
 By default, 'Hide on Checked' is selected with no boxes checked, so all current widgets will continue to display on all pages. 
 
