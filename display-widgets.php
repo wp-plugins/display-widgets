@@ -5,9 +5,10 @@ Plugin URI: http://blog.strategy11.com/display-widgets/
 Description: Adds checkboxes to each widget to show or hide on site pages.
 Author: Stephanie Wells
 Author URI: http://blog.strategy11.com
-Version: 1.9
+Version: 1.10
 */
 //TODO: Add text field for comma separated list of post ids
+//TODO: Add text field that accepts full urls that will be checked under 'else'
 
 function show_dw_widget($instance){
     if (is_home())
@@ -32,7 +33,8 @@ function show_dw_widget($instance){
     else if (is_search())
         $show = $instance['page-search'];
     else{
-        $post_id = $GLOBALS['post']->ID;
+        global $wp_query;
+        $post_id = $wp_query->get_queried_object_id();
         $show = $instance['page-'.$post_id]; 
     }
     if (isset($instance['include']) && (($instance['include'] and $show == false) or ($instance['include'] == 0 and $show)))
@@ -41,8 +43,21 @@ function show_dw_widget($instance){
         return $instance;
 }
 
-function dw_show_hide_widget_options($widget, $return, $instance){ 
-    $pages = get_posts( array('post_type' => 'page', 'post_status' => 'published', 'numberposts' => 99, 'order_by' => 'post_title', 'order' => 'ASC'));
+function dw_show_hide_widget_options($widget, $return, $instance){
+    $last_saved = get_option('dw_check_new_pages'); //Check to see when pages and categories were last saved
+
+    //if more than 1 minute ago, we can check again
+    if(!$last_saved or ((time() - $last_saved) >= 60)){
+        $pages = get_posts( array('post_type' => 'page', 'post_status' => 'published', 'numberposts' => 99, 'order_by' => 'post_title', 'order' => 'ASC'));
+        $cats = get_categories();
+        update_option('dw_saved_page_list', serialize($pages));
+        update_option('dw_saved_cat_list', serialize($cats));
+        update_option('dw_check_new_pages', time());
+    }else{
+        $pages = unserialize(get_option('dw_saved_page_list'));
+        $cats = unserialize(get_option('dw_saved_cat_list'));
+    }
+       
     $wp_page_types = array('front' => 'Front', 'home' => 'Blog','archive' => 'Archives','single' => 'Single Post','404' => '404', 'search' => 'Search');
     
     $instance['include'] = isset($instance['include']) ? $instance['include'] : 0;
@@ -64,7 +79,7 @@ function dw_show_hide_widget_options($widget, $return, $instance){
         <label for="<?php echo $widget->get_field_id('page-'.$page->ID); ?>"><?php _e($page->post_title) ?></label></p>
     <?php	}  ?>
     <p><b>Categories</b></p>
-    <?php foreach (get_categories() as $cat){ 
+    <?php foreach ($cats as $cat){ 
         $instance['cat-'.$cat->cat_ID] = isset($instance['cat-'.$cat->cat_ID]) ? $instance['cat-'.$cat->cat_ID] : false;   
     ?>
         <p><input class="checkbox" type="checkbox" <?php checked($instance['cat-'.$cat->cat_ID], true) ?> id="<?php echo $widget->get_field_id('cat-'.$cat->cat_ID); ?>" name="<?php echo $widget->get_field_name('cat-'.$cat->cat_ID); ?>" />
@@ -85,16 +100,16 @@ function dw_show_hide_widget_options($widget, $return, $instance){
 function dw_update_widget_options($instance, $new_instance, $old_instance){
     $pages = get_posts( array('post_type' => 'page', 'post_status' => 'published', 'numberposts' => 99, 'order_by' => 'post_title', 'order' => 'ASC'));
     foreach ($pages as $page)
-        $instance['page-'.$page->ID] = $new_instance['page-'.$page->ID] ? 1 : 0;
+        $instance['page-'.$page->ID] = isset($new_instance['page-'.$page->ID]) ? 1 : 0;
     foreach (get_categories() as $cat)
-        $instance['cat-'.$cat->cat_ID] = $new_instance['cat-'.$cat->cat_ID] ? 1 : 0;
+        $instance['cat-'.$cat->cat_ID] = isset($new_instance['cat-'.$cat->cat_ID]) ? 1 : 0;
     $instance['include'] = $new_instance['include'] ? 1 : 0;
-    $instance['page-front'] = $new_instance['page-front'] ? 1 : 0;
-    $instance['page-home'] = $new_instance['page-home'] ? 1 : 0;
-    $instance['page-archive'] = $new_instance['page-archive'] ? 1 : 0;
-    $instance['page-single'] = $new_instance['page-single'] ? 1 : 0;
-    $instance['page-404'] = $new_instance['page-404'] ? 1 : 0;
-    $instance['page-search'] = $new_instance['page-search'] ? 1 : 0;
+    $instance['page-front'] = isset($new_instance['page-front']) ? 1 : 0;
+    $instance['page-home'] = isset($new_instance['page-home']) ? 1 : 0;
+    $instance['page-archive'] = isset($new_instance['page-archive']) ? 1 : 0;
+    $instance['page-single'] = isset($new_instance['page-single']) ? 1 : 0;
+    $instance['page-404'] = isset($new_instance['page-404']) ? 1 : 0;
+    $instance['page-search'] = isset($new_instance['page-search']) ? 1 : 0;
     return $instance;
 }
 
