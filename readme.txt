@@ -3,8 +3,8 @@ Contributors: sswells
 Donate link: http://blog.strategy11.com/donate/
 Tags: widget, widgets, admin, show, hide, page, Thesis, sidebar, content, wpmu, wordpress, plugin, post, posts, content
 Requires at least: 2.8
-Tested up to: 2.9.2
-Stable tag: 1.10
+Tested up to: 3.0
+Stable tag: 1.11
 
 Simply hide widgets on specified pages. Adds checkboxes to each widget to either show or hide it on every site page.
 
@@ -34,6 +34,10 @@ This is a known limitation. Widgets written in the pre-2.8 format don't work the
 1. The extra widget options added.
 
 == Changelog ==
+= 1.11 =
+* WordPress 3.0 compatibility
+* Fixed PHP notices
+
 = 1.10 =
 * Improved admin widget page efficiency and load time
 * Fixed bug preventing widgets from being hidden/shown correctly on some subpages
