@@ -3,8 +3,8 @@ Contributors: sswells
 Donate link: http://blog.strategy11.com/donate/
 Tags: widget, widgets, admin, show, hide, page, Thesis, sidebar, content, wpmu, wordpress, plugin, post, posts, content
 Requires at least: 2.8
-Tested up to: 3.0
-Stable tag: 1.11
+Tested up to: 3.0.1
+Stable tag: 1.12
 
 Simply hide widgets on specified pages. Adds checkboxes to each widget to either show or hide it on every site page.
 
@@ -34,6 +34,12 @@ This is a known limitation. Widgets written in the pre-2.8 format don't work the
 1. The extra widget options added.
 
 == Changelog ==
+= 1.12 =
+* Show only published pages, and increase the displayed page limit
+* Toggle sections
+* Added check boxes to hide/show for logged-in users
+* Added text field to list post ids for posts not displayed
+
 = 1.11 =
 * WordPress 3.0 compatibility
 * Fixed PHP notices
@@ -71,4 +77,6 @@ This is a known limitation. Widgets written in the pre-2.8 format don't work the
 
 = 1.1 =
 * Fixed bug that prevented other widget options to be displayed
+
+
 
