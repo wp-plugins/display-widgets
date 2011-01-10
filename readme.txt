@@ -34,6 +34,9 @@ This is a known limitation. Widgets written in the pre-2.8 format don't work the
 1. The extra widget options added.
 
 == Changelog ==
+= 1.13 = 
+* Added a PO file for translators
+
 = 1.12 =
 * Show only published pages, and increase the displayed page limit
 * Toggle sections
@@ -77,6 +80,4 @@ This is a known limitation. Widgets written in the pre-2.8 format don't work the
 
 = 1.1 =
 * Fixed bug that prevented other widget options to be displayed
-
-
 
