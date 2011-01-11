@@ -79,6 +79,11 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
+#: display-widgets.php:117
+#@ display-widgets
+msgid "Miscellaneous"
+msgstr ""
+
 #: display-widgets.php:122
 #@ display-widgets
 msgid "Page"

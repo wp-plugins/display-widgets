@@ -5,7 +5,7 @@ Plugin URI: http://blog.strategy11.com/display-widgets/
 Description: Adds checkboxes to each widget to show or hide on site pages.
 Author: Stephanie Wells
 Author URI: http://blog.strategy11.com
-Version: 1.13
+Version: 1.14
 */
 
 //TODO: Add text field that accepts full urls that will be checked under 'else'
@@ -74,7 +74,7 @@ function dw_show_hide_widget_options($widget, $return, $instance){
         $cats = get_option('dw_saved_cat_list');
     }
        
-    $wp_page_types = array('front' => _e('Front', 'display-widgets'), 'home' => _e('Blog', 'display-widgets'),'archive' => _e('Archives', 'display-widgets'),'single' => _e('Single Post', 'display-widgets'),'404' => '404', 'search' => _e('Search', 'display-widgets'));
+    $wp_page_types = array('front' => __('Front', 'display-widgets'), 'home' => __('Blog', 'display-widgets'),'archive' => __('Archives', 'display-widgets'),'single' => __('Single Post', 'display-widgets'),'404' => '404', 'search' => __('Search', 'display-widgets'));
     
     $instance['include'] = isset($instance['include']) ? $instance['include'] : 0;
     $instance['logout'] = isset($instance['logout']) ? $instance['logout'] : 0;
@@ -114,7 +114,7 @@ function dw_show_hide_widget_options($widget, $return, $instance){
         <label for="<?php echo $widget->get_field_id('cat-'.$cat->cat_ID); ?>"><?php echo $cat->cat_name ?></label></p>
     <?php } ?>
     </div>
-    <p><b>Miscellaneous</b></p>
+    <p><b><?php _e('Miscellaneous', 'display-widgets') ?></b></p>
     <?php foreach ($wp_page_types as $key => $label){ 
         $instance['page-'. $key] = isset($instance['page-'. $key]) ? $instance['page-'. $key] : false;
     ?>
