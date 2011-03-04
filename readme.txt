@@ -34,8 +34,12 @@ This is a known limitation. Widgets written in the pre-2.8 format don't work the
 1. The extra widget options added.
 
 == Changelog ==
+= 1.15 =
+* Added custom post type support
+* Added German translation ([Caspar Hübinger](http://glueckpress.com "Caspar Hübinger"))
+
 = 1.14 =
-* Added Japanese translation
+* Added Japanese translation ([BNG NET](http://bng.net "BNG NET"))
 
 = 1.13 = 
 * Added a PO file for translators

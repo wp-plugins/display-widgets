@@ -22,77 +22,77 @@ msgstr ""
 #: display-widgets.php:84
 #@ display-widgets
 msgid "Front"
-msgstr ""
+msgstr "Frontseite"
 
 #: display-widgets.php:84
 #@ display-widgets
 msgid "Blog"
-msgstr ""
+msgstr "Artikelübersicht (Blog)"
 
 #: display-widgets.php:84
 #@ display-widgets
 msgid "Archives"
-msgstr ""
+msgstr "Archive"
 
 #: display-widgets.php:84
 #@ display-widgets
 msgid "Single Post"
-msgstr ""
+msgstr "Einzelner Artikel"
 
 #: display-widgets.php:84
 #@ display-widgets
 msgid "Search"
-msgstr ""
+msgstr "Suchergebnisse"
 
 #: display-widgets.php:97
 #@ display-widgets
 msgid "Show/Hide Widget"
-msgstr ""
+msgstr "Widget anzeigen/verbergen"
 
 #: display-widgets.php:99
 #@ display-widgets
 msgid "Hide on checked"
-msgstr ""
+msgstr "Auf ausgewählten verbergen"
 
 #: display-widgets.php:100
 #@ display-widgets
 msgid "Show on checked"
-msgstr ""
+msgstr "Auf ausgewählten anzeigen"
 
 #: display-widgets.php:106
 #@ display-widgets
 msgid "Show only for Logged-out users"
-msgstr ""
+msgstr "Nur für nicht-angemeldete Benutzer anzeigen"
 
 #: display-widgets.php:108
 #@ display-widgets
 msgid "Show only for Logged-in users"
-msgstr ""
+msgstr "Nur für angemeldete Benutzer anzeigen"
 
 #: display-widgets.php:110
 #@ display-widgets
 msgid "Pages"
-msgstr ""
+msgstr "Seiten"
 
 #: display-widgets.php:120
 #@ display-widgets
 msgid "Categories"
-msgstr ""
+msgstr "Kategorien"
 
 #: display-widgets.php:129
 #@ display-widgets
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Verschiedenes"
 
 #: display-widgets.php:134
 #@ display-widgets
 msgid "Page"
-msgstr ""
+msgstr "Seite"
 
 #: display-widgets.php:148
 #@ display-widgets
 msgid "Comma Separated list of IDs of posts not listed above"
-msgstr ""
+msgstr "Kommagetrennte Liste mit IDs von Einträgen, die hier nicht gelistet wurden"
 
 #: display-widgets.php:138
 #@ display-widgets

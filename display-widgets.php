@@ -5,7 +5,7 @@ Plugin URI: http://blog.strategy11.com/display-widgets/
 Description: Adds checkboxes to each widget to show or hide on site pages.
 Author: Stephanie Wells
 Author URI: http://blog.strategy11.com
-Version: 1.14
+Version: 1.15
 */
 
 //TODO: Add text field that accepts full urls that will be checked under 'else'
@@ -21,7 +21,14 @@ function show_dw_widget($instance){
     else if (is_archive())
         $show = isset($instance['page-archive']) ? ($instance['page-archive']) : false;
     else if (is_single()){
-        $show = isset($instance['page-single']) ? ($instance['page-single']) : false;
+        if(function_exists('get_post_type')){
+            $type = get_post_type();
+            if($type != 'page' and $type != 'post')
+                $show = isset($instance['type-'.$type]) ? ($instance['type-'.$type]) : false;
+        }
+        if(!isset($show))
+            $show = isset($instance['page-single']) ? ($instance['page-single']) : false;
+            
         if (!$show){
             foreach(get_the_category() as $cat){ 
                 if ($show) continue;
@@ -75,6 +82,11 @@ function dw_show_hide_widget_options($widget, $return, $instance){
     }
        
     $wp_page_types = array('front' => __('Front', 'display-widgets'), 'home' => __('Blog', 'display-widgets'),'archive' => __('Archives', 'display-widgets'),'single' => __('Single Post', 'display-widgets'),'404' => '404', 'search' => __('Search', 'display-widgets'));
+    if(function_exists('get_post_types')){
+        $custom_posts = get_post_types(array(), 'object');
+        foreach(array('revision','post','page','attachment','nav_menu_item') as $unset)
+            unset($custom_posts[$unset]);
+    }
     
     $instance['include'] = isset($instance['include']) ? $instance['include'] : 0;
     $instance['logout'] = isset($instance['logout']) ? $instance['logout'] : 0;
@@ -120,7 +132,19 @@ function dw_show_hide_widget_options($widget, $return, $instance){
     ?>
         <p><input class="checkbox" type="checkbox" <?php checked($instance['page-'. $key], true) ?> id="<?php echo $widget->get_field_id('page-'. $key); ?>" name="<?php echo $widget->get_field_name('page-'. $key); ?>" />
         <label for="<?php echo $widget->get_field_id('page-'. $key); ?>"><?php echo $label .' '. __('Page', 'display-widgets') ?></label></p>
-    <?php } ?>
+    <?php } 
+    
+    if(isset($custom_posts) and !empty($custom_posts)){ ?>
+    <p><b><?php _e('Custom Post Types', 'display-widgets') ?></b></p>
+    <?php foreach ($custom_posts as $post_key => $custom_post){ 
+        $instance['type-'. $post_key] = isset($instance['type-'. $post_key]) ? $instance['type-'. $post_key] : false;
+    ?>
+        <p><input class="checkbox" type="checkbox" <?php checked($instance['type-'. $post_key], true) ?> id="<?php echo $widget->get_field_id('type-'. $post_key); ?>" name="<?php echo $widget->get_field_name('type-'. $post_key); ?>" />
+        <label for="<?php echo $widget->get_field_id('type-'. $post_key); ?>"><?php echo stripslashes($custom_post->labels->name) ?></label></p>
+    <?php } 
+    }
+    ?>
+    
     <p><label for="<?php echo $widget->get_field_id('other_ids'); ?>"><?php _e('Comma Separated list of IDs of posts not listed above', 'display-widgets') ?>:</label>
     <input type="text" value="<?php echo $instance['other_ids'] ?>" name="<?php echo $widget->get_field_name('other_ids'); ?>" id="<?php echo $widget->get_field_id('other_ids'); ?>" />
     </p>
@@ -138,6 +162,15 @@ function dw_update_widget_options($instance, $new_instance, $old_instance){
         $instance['page-'.$page->ID] = isset($new_instance['page-'.$page->ID]) ? 1 : 0;
     foreach (get_categories() as $cat)
         $instance['cat-'.$cat->cat_ID] = isset($new_instance['cat-'.$cat->cat_ID]) ? 1 : 0;
+    
+    if(function_exists('get_post_types')){
+        $custom_posts = get_post_types();
+        foreach(array('revision','post','page','attachment','nav_menu_item') as $unset)
+            unset($custom_posts[$unset]);
+        foreach ($custom_posts as $post_key => $custom_post)
+            $instance['type-'.$post_key] = isset($new_instance['type-'.$post_key]) ? 1 : 0;
+    }
+           
     $instance['include'] = $new_instance['include'] ? 1 : 0;
     $instance['logout'] = $new_instance['logout'] ? 1 : 0;
     $instance['login'] = $new_instance['login'] ? 1 : 0;
