@@ -3,8 +3,8 @@ Contributors: sswells
 Donate link: http://blog.strategy11.com/donate/
 Tags: widget, widgets, admin, show, hide, page, Thesis, sidebar, content, wpmu, wordpress, plugin, post, posts, content
 Requires at least: 2.8
-Tested up to: 3.0.1
-Stable tag: 1.15
+Tested up to: 3.1
+Stable tag: 1.16
 
 Simply hide widgets on specified pages. Adds checkboxes to each widget to either show or hide it on every site page.
 
@@ -13,6 +13,11 @@ Simply hide widgets on specified pages. Adds checkboxes to each widget to either
 Change your sidebar content with different pages. Avoid creating multiple sidebars and duplicating widgets by adding check boxes to each widget in the admin (as long as it is written in the WordPress version 2.8 format) which will either show or hide the widgets on every site page. Great for use with the [Thesis WordPress Theme](http://blog.strategy11.com/thesis "Thesis WordPress Theme") (aff link), or just to avoid extra coding. 
 
 By default, 'Hide on Checked' is selected with no boxes checked, so all current widgets will continue to display on all pages. 
+
+= Translations =
+* Dutch ([Alanya Hotels](http://www.alanyahotels.com/ "Alanya Hotels"))
+* German ([Caspar Hübinger](http://glueckpress.com "Caspar Hübinger"))
+* Japanese ([BNG NET](http://staff.blog.bng.net/ "BNG NET"))
 
 == Installation ==
 
