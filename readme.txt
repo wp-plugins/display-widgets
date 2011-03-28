@@ -34,12 +34,16 @@ This is a known limitation. Widgets written in the pre-2.8 format don't work the
 1. The extra widget options added.
 
 == Changelog ==
+= 1.16 =
+* Corrected naming of the Japanese translation files
+* Added Dutch translation ([Alanya Hotels](http://www.alanyahotels.com/ "Alanya Hotels"))
+
 = 1.15 =
 * Added custom post type support
 * Added German translation ([Caspar Hübinger](http://glueckpress.com "Caspar Hübinger"))
 
 = 1.14 =
-* Added Japanese translation ([BNG NET](http://bng.net "BNG NET"))
+* Added Japanese translation ([BNG NET](http://staff.blog.bng.net/ "BNG NET"))
 
 = 1.13 = 
 * Added a PO file for translators
