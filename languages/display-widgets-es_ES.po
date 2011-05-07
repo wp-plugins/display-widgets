@@ -1,0 +1,67 @@
+# Translation of the WordPress plugin Display widgets 1.2 by Stephanie Wells.
+# Copyright (C) 2010 Stephanie Wells
+# This file is distributed under the same license as the Display widgets package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Display widgets 1.2\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/display-widgets\n"
+"POT-Creation-Date: 2010-08-26 12:29+0200\n"
+"PO-Revision-Date: 2011-04-15 16:39+0100\n"
+"Last-Translator: Alicia García Holgado <alicia.alicia1986gh@gmail.com>\n"
+"Language-Team: Alicia García Holgado <aliciagh@usal.es>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: SPAIN\n"
+
+#: display-widgets.php:69
+msgid "Show/Hide Widget"
+msgstr "Mostrar/Ocultar Widget"
+
+#: display-widgets.php:71
+msgid "Hide on checked"
+msgstr "Ocultar en los elementos marcados"
+
+#: display-widgets.php:72
+msgid "Show on checked"
+msgstr "Mostrar en los elementos marcados"
+
+#: display-widgets.php:77
+msgid "Pages"
+msgstr "Páginas"
+
+#: display-widgets.php:84
+msgid "Categories"
+msgstr "Categorías"
+
+#: display-widgets.php:92
+msgid "Miscellaneous"
+msgstr "Miscelánea"
+
+#: display-widgets.php:97
+msgid " Page"
+msgstr " Página"
+
+#. Plugin Name of the plugin/theme
+msgid "Display widgets"
+msgstr "Display widgets"
+
+#. Plugin URI of the plugin/theme
+msgid "http://blog.strategy11.com/display-widgets/"
+msgstr "http://blog.strategy11.com/display-widgets/"
+
+#. Description of the plugin/theme
+msgid "Adds checkboxes to each widget to show or hide on site pages."
+msgstr "Añade checkboxes a cada widget para mostralo u ocultarlo en las páginas del blog."
+
+#. Author of the plugin/theme
+msgid "Stephanie Wells"
+msgstr "Stephanie Wells"
+
+#. Author URI of the plugin/theme
+msgid "http://blog.strategy11.com"
+msgstr "http://blog.strategy11.com"
+
