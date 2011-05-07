@@ -14,6 +14,8 @@ Change your sidebar content with different pages. Avoid creating multiple sideba
 
 By default, 'Hide on Checked' is selected with no boxes checked, so all current widgets will continue to display on all pages. 
 
+http://strategy11.com/display-widgets/
+
 = Translations =
 * Dutch ([Alanya Hotels](http://www.alanyahotels.com/ "Alanya Hotels"))
 * German ([Caspar Hübinger](http://glueckpress.com "Caspar Hübinger"))
