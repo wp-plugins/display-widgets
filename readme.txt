@@ -20,6 +20,8 @@ http://strategy11.com/display-widgets/
 * Dutch ([Alanya Hotels](http://www.alanyahotels.com/ "Alanya Hotels"))
 * German ([Caspar Hübinger](http://glueckpress.com "Caspar Hübinger"))
 * Japanese ([BNG NET](http://staff.blog.bng.net/ "BNG NET"))
+* Russian ([Serhij](http://darmoid.ru "Serhij"))
+* Spanish ([Alicia García Holgado](http://grial.usal.es/pfcgrial "Alicia García Holgado"))
 
 == Installation ==
 
@@ -41,6 +43,10 @@ This is a known limitation. Widgets written in the pre-2.8 format don't work the
 1. The extra widget options added.
 
 == Changelog ==
+= 1.17 =
+* Added Spanish translation ([Alicia García Holgado](http://grial.usal.es/pfcgrial "Alicia García Holgado"))
+* Added Russian translation ([Serhij](http://darmoid.ru "Serhij"))
+
 = 1.16 =
 * Corrected naming of the Japanese translation files
 * Added Dutch translation ([Alanya Hotels](http://www.alanyahotels.com/ "Alanya Hotels"))

@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Display widgets
-Plugin URI: http://blog.strategy11.com/display-widgets/
+Plugin URI: http://strategy11.com/display-widgets/
 Description: Adds checkboxes to each widget to show or hide on site pages.
 Author: Stephanie Wells
-Author URI: http://blog.strategy11.com
-Version: 1.16
+Author URI: http://strategy11.com
+Version: 1.17
 */
 
 //TODO: Add text field that accepts full urls that will be checked under 'else'
