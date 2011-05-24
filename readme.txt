@@ -43,6 +43,11 @@ This is a known limitation. Widgets written in the pre-2.8 format don't work the
 1. The extra widget options added.
 
 == Changelog ==
+= 1.18 =
+* Added custom taxonomy support
+* Show category options even if there are no posts in them 
+* Fixed expand and collapse bug in widget options
+
 = 1.17 =
 * Added Spanish translation ([Alicia García Holgado](http://grial.usal.es/pfcgrial "Alicia García Holgado"))
 * Added Russian translation ([Serhij](http://darmoid.ru "Serhij"))
