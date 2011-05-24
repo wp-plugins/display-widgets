@@ -1,6 +1,6 @@
 === Display Widgets ===
 Contributors: sswells
-Donate link: http://blog.strategy11.com/donate/
+Donate link: http://strategy11.com/donate/
 Tags: widget, widgets, admin, show, hide, page, Thesis, sidebar, content, wpmu, wordpress, plugin, post, posts, content
 Requires at least: 2.8
 Tested up to: 3.1
