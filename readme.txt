@@ -1,10 +1,10 @@
 === Display Widgets ===
 Contributors: sswells
 Donate link: http://strategy11.com/donate/
-Tags: widget, widgets, admin, show, hide, page, Thesis, sidebar, content, wpmu, wordpress, plugin, post, posts, content
+Tags: widget, widgets, admin, show, hide, page, Thesis, sidebar, content, wpmu, wordpress, plugin, post, posts, content, filter
 Requires at least: 2.8
 Tested up to: 3.1
-Stable tag: 1.18
+Stable tag: 1.19
 
 Simply hide widgets on specified pages. Adds checkboxes to each widget to either show or hide it on every site page.
 
