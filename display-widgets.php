@@ -5,7 +5,7 @@ Plugin URI: http://strategy11.com/display-widgets/
 Description: Adds checkboxes to each widget to show or hide on site pages.
 Author: Stephanie Wells
 Author URI: http://strategy11.com
-Version: 1.18
+Version: 1.19
 */
 
 load_plugin_textdomain( 'display-widgets', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
@@ -15,6 +15,9 @@ add_action('in_widget_form', 'dw_show_hide_widget_options', 10, 3);
 add_filter('widget_update_callback', 'dw_update_widget_options', 10, 3);
 
 function show_dw_widget($instance){
+    global $wp_query;
+    $post_id = $wp_query->get_queried_object_id();
+    
     if (is_home()){
         $show = isset($instance['page-home']) ? ($instance['page-home']) : false;
     }else if (is_front_page()){
@@ -49,19 +52,19 @@ function show_dw_widget($instance){
         $show = isset($instance['page-404']) ? ($instance['page-404']) : false;
     }else if (is_search()){
         $show = isset($instance['page-search']) ? ($instance['page-search']) : false;
-    }else{
-        global $wp_query;
-        $post_id = $wp_query->get_queried_object_id();
+    }else if($post_id){
         $show = isset($instance['page-'.$post_id]) ? ($instance['page-'.$post_id]) : false;
-        
-        if (!$show and isset($instance['other_ids']) and !empty($instance['other_ids'])){
-            $other_ids = explode(',', $instance['other_ids']);
-            foreach($other_ids as $other_id){
-                if($post_id == (int)$other_id)
-                    $show = true;
-            }
+    }
+    
+    
+    if ($post_id and !$show and isset($instance['other_ids']) and !empty($instance['other_ids'])){
+        $other_ids = explode(',', $instance['other_ids']);
+        foreach($other_ids as $other_id){
+            if($post_id == (int)$other_id)
+                $show = true;
         }
     }
+
     
     if (isset($instance['include']) && (($instance['include'] and $show == false) or ($instance['include'] == 0 and $show))){
         return false;

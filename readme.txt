@@ -43,6 +43,9 @@ This is a known limitation. Widgets written in the pre-2.8 format don't work the
 1. The extra widget options added.
 
 == Changelog ==
+= 1.19 =
+* Fixed option to insert IDs to work with posts
+
 = 1.18 =
 * Added custom taxonomy support
 * Show category options even if there are no posts in them 
