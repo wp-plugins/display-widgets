@@ -19,6 +19,7 @@ http://strategy11.com/display-widgets/
 = Translations =
 * Dutch ([Alanya Hotels](http://www.alanyahotels.com/ "Alanya Hotels"))
 * German ([Caspar Hübinger](http://glueckpress.com "Caspar Hübinger"))
+* Hebrew ([Ariel](http://arielk.net "Ariel"))
 * Japanese ([BNG NET](http://staff.blog.bng.net/ "BNG NET"))
 * Russian ([Serhij](http://darmoid.ru "Serhij"))
 * Spanish ([Alicia García Holgado](http://grial.usal.es/pfcgrial "Alicia García Holgado"))
@@ -43,6 +44,10 @@ This is a known limitation. Widgets written in the pre-2.8 format don't work the
 1. The extra widget options added.
 
 == Changelog ==
+= 1.20 =
+* Added Hebrew translation ([Ariel](http://arielk.net "Ariel"))
+* Fix css typo to correctly show the pointer cursor to show/hide option under the headings
+
 = 1.19 =
 * Fixed option to insert IDs to work with posts
 
