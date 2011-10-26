@@ -18,11 +18,11 @@ http://strategy11.com/display-widgets/
 
 = Translations =
 * Chinese ([Hanolex](http://hanolex.org "Hanolex"))
-* Dutch ([Alanya Hotels](http://www.alanyahotels.com/ "Alanya Hotels"))
+* Dutch (Alanya Hotels)
 * German ([Caspar Hübinger](http://glueckpress.com "Caspar Hübinger"))
 * Hebrew ([Ariel](http://arielk.net "Ariel"))
 * Japanese ([BNG NET](http://staff.blog.bng.net/ "BNG NET"))
-* Romanian ([Nobelcom](http://www.nobelcom.com/ "Nobelcom"))
+* Romanian (Nobelcom)
 * Russian ([Serhij](http://darmoid.ru "Serhij"))
 * Spanish ([Alicia García Holgado](http://grial.usal.es/pfcgrial "Alicia García Holgado"))
 
@@ -48,7 +48,7 @@ This is a known limitation. Widgets written in the pre-2.8 format don't work the
 == Changelog ==
 
 = 1.21 =
-* Added Romanian translation ([Nobelcom](http://www.nobelcom.com/ "Nobelcom"))
+* Added Romanian translation (Nobelcom)
 * Added Chinese translation ([Hanolex](http://hanolex.org "Hanolex"))
 
 = 1.20 =
@@ -69,7 +69,7 @@ This is a known limitation. Widgets written in the pre-2.8 format don't work the
 
 = 1.16 =
 * Corrected naming of the Japanese translation files
-* Added Dutch translation ([Alanya Hotels](http://www.alanyahotels.com/ "Alanya Hotels"))
+* Added Dutch translation (Alanya Hotels)
 
 = 1.15 =
 * Added custom post type support
