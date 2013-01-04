@@ -3,7 +3,7 @@ Contributors: sswells
 Donate link: http://strategy11.com/donate/
 Tags: widget, widgets, admin, show, hide, page, sidebar, content, wpmu, wordpress, plugin, post, posts, content, filter, widget logic, widget context
 Requires at least: 2.8
-Tested up to: 3.2
+Tested up to: 3.5
 Stable tag: 1.22
 
 Simply hide widgets on specified pages. Adds checkboxes to each widget to either show or hide it on every site page.
@@ -17,16 +17,19 @@ By default, 'Hide on Checked' is selected with no boxes checked, so all current 
 http://strategy11.com/display-widgets/
 
 = Translations =
-* Albanian
-* Bahasa Malaysian
-* Chinese
-* Dutch
-* German
-* Hebrew
-* Japanese
-* Romanian
-* Russian
-* Spanish
+* Albanian ([Taulant](http://wporacle.com/ "Taulant"))
+* Bahasa Malaysian (Jass at 100webhosting.com)
+* Chinese ([Hanolex](http://hanolex.org "Hanolex"))
+* Dutch (Alanya Hotels)
+* French ([Fmarie](http://www.fmarie.net/ "Fmarie"))
+* German ([Caspar Hübinger](http://glueckpress.com "Caspar Hübinger"))
+* Hebrew ([Ariel](http://arielk.net "Ariel"))
+* Japanese ([BNG NET](http://staff.blog.bng.net/ "BNG NET"))
+* Polish (Soplica at artvision1.pl)
+* Romanian (Nobelcom)
+* Russian ([Serhij](http://darmoid.ru "Serhij"))
+* Spanish ([Alicia García Holgado](http://grial.usal.es/pfcgrial "Alicia García Holgado"))
+* Tagalog (Hanne at pointen.dk)
 
 == Installation ==
 
@@ -48,6 +51,12 @@ This is a known limitation. Widgets written in the pre-2.8 format don't work the
 1. The extra widget options added.
 
 == Changelog ==
+= 1.23 =
+* Switched WPML language support from highest to lowest priority when determining whether to show or hide
+* Reduced database size of options saved
+* Changed 'login' to 'dw_login' parameter naming to remove conflicts with certain widgets
+* Added French, Tagalog, and Polish translations
+
 = 1.22 =
 * Added WPML support
 * Fix to allow more than 5 taxonomies
