@@ -51,6 +51,9 @@ This is a known limitation. Widgets written in the pre-2.8 format don't work the
 1. The extra widget options added.
 
 == Changelog ==
+= 1.24 =
+* Fixed bug preventing boxes unchecking for some users
+
 = 1.23 =
 * Switched WPML language support from highest to lowest priority when determining whether to show or hide
 * Reduced database size of options saved
