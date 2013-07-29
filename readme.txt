@@ -12,7 +12,9 @@ Simply hide widgets on specified pages. Adds checkboxes to each widget to either
 
 Change your sidebar content for different pages, categories, custom taxonomies, and WPML languages. Avoid creating multiple sidebars and duplicating widgets by adding check boxes to each widget in the admin (as long as it is written in the WordPress version 2.8 format) which will either show or hide the widgets on every site page. Great for avoiding extra coding and keeping your sidebars clean. 
 
-By default, 'Hide on Checked' is selected with no boxes checked, so all current widgets will continue to display on all pages. 
+By default, 'Hide on Checked' is selected with no boxes checked, so all current widgets will continue to display on all pages.
+
+You can also find a development version where you can add translations and bug fixes on ([GitHub](https://github.com/stephywells/display-widgets "GitHub"))
 
 http://strategy11.com/display-widgets/
 
