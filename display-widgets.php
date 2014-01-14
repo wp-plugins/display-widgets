@@ -7,7 +7,7 @@ Author: Strategy11
 Author URI: http://strategy11.com
 Version: 2.0
 */
-//return;
+
 global $dw_plugin;
 $dw_plugin = new DWPlugin();
 
