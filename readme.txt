@@ -53,6 +53,13 @@ This is a known limitation. Widgets written in the pre-2.8 format don't work the
 1. The extra widget options added.
 
 == Changelog ==
+= 2.01 =
+* Fixed for pre 3.8 compatibility
+* Fixed logged-in/logged-out default to Everyone for existing widgets
+* Fixed category checking for display
+* Correctly show settings after save
+* Only show public post types in the options
+
 = 2.0 =
 * Change the timing of checking widgets, so is_active_sidebar works correctly
 * Load the widget options when the widget is opened to speed up page load

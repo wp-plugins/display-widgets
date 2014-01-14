@@ -5,7 +5,7 @@ Plugin URI: http://strategy11.com/display-widgets/
 Description: Adds checkboxes to each widget to show or hide on site pages.
 Author: Strategy11
 Author URI: http://strategy11.com
-Version: 2.0
+Version: 2.01
 */
 
 global $dw_plugin;
@@ -49,6 +49,8 @@ class DWPlugin{
         // when a custom post type is added
         add_action('update_option_rewrite_rules', array(&$this, 'delete_transient'));
         
+        // reset transient after activating the plugin
+        register_activation_hook(dirname(__FILE__) .'/display_widgets.php', array(&$this, 'delete_transient'));
         
         add_action('plugins_loaded', array(&$this, 'load_lang'));
     }
@@ -61,6 +63,11 @@ class DWPlugin{
             $show = isset($instance['page-home']) ? $instance['page-home'] : false;
             if ( !$show && $post_id ){
                 $show = isset($instance['page-'. $post_id]) ? $instance['page-'. $post_id] : false;
+            }
+            
+            // check if blog page is front page too
+            if ( !$show && is_front_page() && isset($instance['page-front']) ) {
+                $show = $instance['page-front'];
             }
         } else if ( is_front_page() ) {
             $show = isset($instance['page-front']) ? $instance['page-front'] : false;
@@ -90,17 +97,17 @@ class DWPlugin{
 
             if ( !$show ) {
                 $cats = get_the_category();
-                foreach ( $cats as $cat_ID => $cat_name ) { 
-                    if ($show) continue;
-                    $c_id = self::get_lang_id($cat_ID, 'category');
+                foreach ( $cats as $cat ) { 
+                    if ($show) break;
+                    $c_id = self::get_lang_id($cat->cat_ID, 'category');
                     if ( isset($instance['cat-'. $c_id]) ) {
                         $show = $instance['cat-'. $c_id];
                     }
                     unset($c_id);
-                    unset($cat_ID);
-                    unset($cat_name);
+                    unset($cat);
                 } 
             }
+            
         } else if ( is_404() ) {
             $show = isset($instance['page-404']) ? $instance['page-404'] : false;
         } else if ( is_search() ) {
@@ -131,7 +138,7 @@ class DWPlugin{
 
         $instance['dw_include'] = isset($instance['dw_include']) ? $instance['dw_include'] : 0;
         $instance['dw_logged'] = self::show_logged($instance);
-
+        
         if ( ( $instance['dw_include'] && false == $show ) || ( 0 == $instance['dw_include'] && $show ) ) {
             return false;
         } else {
@@ -142,7 +149,7 @@ class DWPlugin{
             }
 
         }
-
+        
 	    return $instance;
     }
 
@@ -199,10 +206,6 @@ class DWPlugin{
 
                 if ( !$show ) {
                     unset($sidebars[$s][$w]);
-
-                    if ( empty($sidebars[$s]) ) {
-                        unset($sidebars[$s]);
-                    }
                 }
 
                 unset($widget);
@@ -214,7 +217,7 @@ class DWPlugin{
     }
     
     function hidden_widget_options($widget, $return, $instance) {
-        if ( $_POST && isset($_POST['action']) && $_POST['action'] == 'save-widget' ) {
+        if ( $_POST && isset($_POST['id_base']) && $_POST['id_base'] == $widget->id_base ) {
             // widget was just saved so it's open
             self::show_hide_widget_options($widget, $return, $instance);
             return;
@@ -355,11 +358,11 @@ class DWPlugin{
     
     <h4 class="dw_toggle" style="cursor:pointer;"><?php _e('Categories') ?> +/-</h4>
     <div class="dw_collapse">
-    <?php foreach ( $this->cats as $cat_ID => $cat_name ) { 
-        $instance['cat-'. $cat_ID] = isset($instance['cat-'. $cat_ID]) ? $instance['cat-'. $cat_ID] : false;   
+    <?php foreach ( $this->cats as $cat ) { 
+        $instance['cat-'. $cat->cat_ID] = isset($instance['cat-'. $cat->cat_ID]) ? $instance['cat-'. $cat->cat_ID] : false;   
     ?>
-        <p><input class="checkbox" type="checkbox" <?php checked($instance['cat-'. $cat_ID], true) ?> id="<?php echo $widget->get_field_id('cat-'. $cat_ID); ?>" name="<?php echo $widget->get_field_name('cat-'. $cat_ID); ?>" />
-        <label for="<?php echo $widget->get_field_id('cat-'. $cat_ID); ?>"><?php echo $cat_name ?></label></p>
+        <p><input class="checkbox" type="checkbox" <?php checked($instance['cat-'. $cat->cat_ID], true) ?> id="<?php echo $widget->get_field_id('cat-'. $cat->cat_ID); ?>" name="<?php echo $widget->get_field_name('cat-'. $cat->cat_ID); ?>" />
+        <label for="<?php echo $widget->get_field_id('cat-'. $cat->cat_ID); ?>"><?php echo $cat->cat_name ?></label></p>
     <?php
         unset($cat);
         } 
@@ -420,14 +423,13 @@ class DWPlugin{
             }
         }
 
-        foreach ( $this->cats as $cat_ID => $cat_name ) {
-            if ( isset($new_instance['cat-'. $cat_ID]) ) {
-                $instance['cat-'. $cat_ID] = 1;
-            } else if ( isset($instance['cat-'. $cat_ID]) ){
-                unset($instance['cat-'. $cat_ID]);
+        foreach ( $this->cats as $cat ) {
+            if ( isset($new_instance['cat-'. $cat->cat_ID]) ) {
+                $instance['cat-'. $cat->cat_ID] = 1;
+            } else if ( isset($instance['cat-'. $cat->cat_ID]) ){
+                unset($instance['cat-'. $cat->cat_ID]);
             }
-            unset($cat_ID);
-            unset($cat_name);
+            unset($cat);
         }
 
         if ( !empty($this->cposts) ) {
@@ -542,9 +544,9 @@ function dw_toggle(){jQuery(this).next('.dw_collapse').toggle();}
             return $instance['dw_logged'];
         }
         
-        if ( isset($instance['dw_logout']) && isset($instance['dw_logout']) ) {
+        if ( isset($instance['dw_logout']) && $instance['dw_logout'] ) {
             $instance['dw_logged'] = 'out';
-        } else if ( isset($instance['dw_login']) && isset($instance['dw_login']) ) {
+        } else if ( isset($instance['dw_login']) && $instance['dw_login'] ) {
             $instance['dw_logged'] = 'in';
         } else {
             $instance['dw_logged'] = '';
@@ -594,17 +596,20 @@ function dw_toggle(){jQuery(this).next('.dw_collapse').toggle();}
         if ( empty($this->cats) ) {
             $this->cats = get_categories( array(
                 'hide_empty'    => false,
-                'fields'        => 'id=>name',
+                //'fields'        => 'id=>name', //added in 3.8
             ) );    
         }
         
         if ( empty($this->cposts) ) {
-            $this->cposts = get_post_types(array(), 'object');
-            foreach ( array('revision','post','page','attachment','nav_menu_item') as $unset ) {
+            $this->cposts = get_post_types( array(
+                'public' => true,
+            ), 'object');
+            
+            foreach ( array( 'revision', 'post', 'page', 'attachment', 'nav_menu_item' ) as $unset ) {
                 unset($this->cposts[$unset]);
             }
             
-            foreach($this->cposts as $c => $type){
+            foreach ( $this->cposts as $c => $type ) {
                 $post_taxes = get_object_taxonomies($c);
                 foreach ( $post_taxes as $post_tax) {
                     $this->taxes[] = $post_tax;
