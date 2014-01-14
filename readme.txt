@@ -53,6 +53,9 @@ This is a known limitation. Widgets written in the pre-2.8 format don't work the
 1. The extra widget options added.
 
 == Changelog ==
+= 2.02 =
+* Trigger widget checking later on page load
+
 = 2.01 =
 * Fixed for pre 3.8 compatibility
 * Fixed logged-in/logged-out default to Everyone for existing widgets

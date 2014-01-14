@@ -5,7 +5,7 @@ Plugin URI: http://strategy11.com/display-widgets/
 Description: Adds checkboxes to each widget to show or hide on site pages.
 Author: Strategy11
 Author URI: http://strategy11.com
-Version: 2.01
+Version: 2.02
 */
 
 global $dw_plugin;
@@ -34,7 +34,7 @@ class DWPlugin{
     
     function __construct(){
         //add_filter('widget_display_callback', array(&$this, 'show_widget'));
-        add_filter('sidebars_widgets', array(&$this, 'sidebars_widgets'));
+        add_filter('wp_head', array(&$this, 'trigger_widget_checks'));
         add_action('in_widget_form', array(&$this, 'hidden_widget_options'), 10, 3);
         add_filter('widget_update_callback', array(&$this, 'update_widget_options'), 10, 3);
         add_action('wp_ajax_dw_show_widget', array(&$this, 'show_widget_options'));
@@ -50,9 +50,13 @@ class DWPlugin{
         add_action('update_option_rewrite_rules', array(&$this, 'delete_transient'));
         
         // reset transient after activating the plugin
-        register_activation_hook(dirname(__FILE__) .'/display_widgets.php', array(&$this, 'delete_transient'));
+        register_activation_hook(dirname(__FILE__) .'/display-widgets.php', array(&$this, 'delete_transient'));
         
         add_action('plugins_loaded', array(&$this, 'load_lang'));
+    }
+    
+    function trigger_widget_checks() {
+        add_filter('sidebars_widgets', array(&$this, 'sidebars_widgets'));
     }
 
     function show_widget($instance) {
@@ -358,7 +362,7 @@ class DWPlugin{
     
     <h4 class="dw_toggle" style="cursor:pointer;"><?php _e('Categories') ?> +/-</h4>
     <div class="dw_collapse">
-    <?php foreach ( $this->cats as $cat ) { 
+    <?php foreach ( $this->cats as $cat ) {
         $instance['cat-'. $cat->cat_ID] = isset($instance['cat-'. $cat->cat_ID]) ? $instance['cat-'. $cat->cat_ID] : false;   
     ?>
         <p><input class="checkbox" type="checkbox" <?php checked($instance['cat-'. $cat->cat_ID], true) ?> id="<?php echo $widget->get_field_id('cat-'. $cat->cat_ID); ?>" name="<?php echo $widget->get_field_name('cat-'. $cat->cat_ID); ?>" />
