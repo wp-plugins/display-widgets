@@ -4,7 +4,7 @@ Donate link: http://strategy11.com/donate/
 Tags: widget, widgets, admin, show, hide, page, sidebar, content, wpmu, wordpress, plugin, post, posts, content, filter, widget logic, widget context
 Requires at least: 3.1
 Tested up to: 3.8
-Stable tag: 2.0
+Stable tag: 2.01
 
 Simply hide widgets on specified pages. Adds checkboxes to each widget to either show or hide it on every site page.
 
