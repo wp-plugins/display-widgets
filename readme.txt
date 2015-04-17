@@ -3,7 +3,7 @@ Contributors: sswells
 Donate link: http://strategy11.com/donate/
 Tags: widget, widgets, admin, show, hide, page, sidebar, content, wpmu, wordpress, plugin, post, posts, content, filter, widget logic, widget context
 Requires at least: 3.1
-Tested up to: 3.8
+Tested up to: 4.1
 Stable tag: 2.03
 
 Simply hide widgets on specified pages. Adds checkboxes to each widget to either show or hide it on every site page.
@@ -17,6 +17,8 @@ By default, 'Hide on checked pages' is selected with no boxes checked, so all cu
 You can also find a development version where you can add translations and bug fixes on ([GitHub](https://github.com/stephywells/display-widgets "GitHub"))
 
 http://strategy11.com/display-widgets/
+
+Check out [Formidable Forms - The Best WordPress Forms Plugin](https://formidablepro.com "Formidable Forms - The Best WordPress Forms Plugin")
 
 = Translations =
 * Albanian ([Taulant](http://wporacle.com/ "Taulant"))
